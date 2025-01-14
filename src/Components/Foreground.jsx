@@ -37,7 +37,7 @@ function Foreground() {
   const resetInp = () => {
     setTask("");
     setTag("");
-    setColor("green");
+    setColor("orange");
     setDate(new Date().toISOString().slice(0, 10));
   };
   const removeElement = (red) => {
@@ -48,34 +48,34 @@ function Foreground() {
   const reference = useRef();
   return (
     <div
-      className="w-full h-screen fixed z-[3] p-6 flex flex-wrap gap-[40px]"
+      className="w-full h-screen fixed z-[3] p-6 flex flex-wrap gap-[40px] max-sm:gap-[10px] max-sm:justify-center max-sm:p-2 "
       ref={reference}
     >
       <div
-        className="absolute w-[50px] h-[40px] bg-slate-300 rounded-full select-none bottom-5 right-5 flex justify-center items-center cursor-pointer"
+        className="absolute w-[50px] h-[40px] bg-slate-200 rounded-full select-none bottom-5 right-5 flex justify-center items-center cursor-pointer dark:bg-black"
         onClick={() => {
           setPopup(true);
         }}
       >
-        <MdAddTask size="1.5vw" />
+        <MdAddTask size="1.5vw" className="max-sm:scale-[3] dark:text-gray-300" />
       </div>
       {popup ? (
-        <div className="w-[600px] h-[350px] bg-zinc-900 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] rounded-[30px] flex flex-col px-4 py-6 justify-between z-10">
+        <div className="w-[600px] h-[350px] bg-zinc-900 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] rounded-[30px] flex flex-col px-4 py-6 justify-between z-10 max-sm:w-[90%]">
           <div className="w-full  flex justify-end">
             <div
-              className="w-[50px] h-[40px] bg-slate-300 rounded-full select-none flex justify-center items-center cursor-pointer "
+              className="w-[50px] h-[40px] bg-slate-300 rounded-full select-none flex justify-center items-center cursor-pointer max-sm:w-[40px] max-sm:h-[30px]"
               onClick={() => {
                 setPopup(false);
               }}
             >
-              <IoClose size="1.5vw" />
+              <IoClose size="1.5vw" className="max-sm:scale-[3]" />
             </div>
           </div>
 
           <div className="w-full flex flex-col px-[20px] gap-[20px]">
             <input
               type="text"
-              className="h-[40px] bg-slate-400  outline-none text-slate-800 font-mont text-[1.4vw] px-[10px] rounded-lg placeholder:text-slate-800 font-semibold"
+              className="h-[40px] bg-slate-400  outline-none text-slate-800 font-mont text-[1.4vw] px-[10px] rounded-lg placeholder:text-slate-800 font-semibold max-sm:text-[4vw]"
               placeholder="Task.."
               value={task}
               onChange={(e) => setTask(e.target.value)}
@@ -84,7 +84,7 @@ function Foreground() {
               type="date"
               name="due"
               id="due"
-              className="h-[40px] px-[10px] font-mont bg-slate-400 rounded-lg outline-none font-semibold"
+              className="h-[40px] px-[10px] font-mont bg-slate-400 rounded-lg outline-none font-semibold max-sm:text-[4vw]"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               min={new Date().toISOString().slice(0, 10)}
@@ -95,16 +95,16 @@ function Foreground() {
             <select
               name="importance"
               id="important"
-              className="outline-none w-[20%] h-[40px] px-[10px] bg-slate-400 rounded-lg text-[1.2vw] font-mont font-semibold"
+              className="outline-none w-[20%] h-[40px] px-[10px] bg-slate-400 rounded-lg text-[1.2vw] font-mont font-semibold max-sm:text-[3vw] max-sm:w-[40%]"
               value={color}
               onChange={(e) => setColor(e.target.value)}
             >
-              <option value="green">Green</option>
               <option value="indigo">Indigo</option>
+              <option value="orange">Orange</option>
             </select>
             <input
               type="text"
-              className="w-[25%] h-[40px] px-[10px] bg-slate-400 rounded-lg text-slate-800 outline-none text-[1.2vw] font-mont placeholder:text-slate-800 font-semibold"
+              className="w-[25%] h-[40px] px-[10px] bg-slate-400 rounded-lg text-slate-800 outline-none text-[1.2vw] font-mont placeholder:text-slate-800 font-semibold max-sm:text-[3vw] max-sm:w-[40%]"
               placeholder="Tag.."
               value={tag}
               onChange={(e) => setTag(e.target.value)}
@@ -115,7 +115,7 @@ function Foreground() {
             className="w-full px-[20px] flex justify-center cursor-pointer"
             onClick={() => validateTask()}
           >
-            <h1 className="bg-slate-300 px-4 py-2 font-mont rounded-lg font-semibold">
+            <h1 className="bg-slate-300 px-4 py-2 font-mont rounded-lg font-semibold max-sm:text-[3vw]">
               {" "}
               Add Task
             </h1>
