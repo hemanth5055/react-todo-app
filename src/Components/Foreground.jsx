@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdAddTask } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import Taskcards from "./Taskcards";
+import { v4 as uuidv4 } from "uuid";
 
 function Foreground() {
   const [popup, setPopup] = useState(false);
@@ -10,11 +11,25 @@ function Foreground() {
   const [tag, setTag] = useState("");
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [color, setColor] = useState("orange");
-  const [id, setId] = useState(0);
+  useEffect(() => {
+    if (localStorage.getItem("tasksLocal") == null) {
+      localStorage.setItem("tasksLocal", JSON.stringify(tasks));
+    } else {
+      setTasks(JSON.parse(localStorage.getItem("tasksLocal")));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("tasksLocal", JSON.stringify(tasks));
+  }, [tasks]);
   const validateTask = () => {
     if (task.length > 0) {
-      let temp = { Id: id, Name: task, Tag: tag, Color: color, Date: date };
-      setId((prev) => prev + 1);
+      let temp = {
+        Id: uuidv4(),
+        Name: task,
+        Tag: tag,
+        Color: color,
+        Date: date,
+      };
       setTasks((prev) => [...prev, temp], console.log(tasks));
       resetInp();
     }
@@ -32,7 +47,10 @@ function Foreground() {
   };
   const reference = useRef();
   return (
-    <div className="w-full h-screen fixed z-[3] p-6 flex flex-wrap gap-[40px]" ref={reference}>
+    <div
+      className="w-full h-screen fixed z-[3] p-6 flex flex-wrap gap-[40px]"
+      ref={reference}
+    >
       <div
         className="absolute w-[50px] h-[40px] bg-slate-300 rounded-full select-none bottom-5 right-5 flex justify-center items-center cursor-pointer"
         onClick={() => {
