@@ -14,21 +14,10 @@ function Todo() {
   };
   return (
     <>
-      <div className="w-full h-screen relative bg-gray-400 dark:bg-zinc-800 ">
+      <div className="w-full h-screen relative bg-gray-400 bg-zinc-800 ">
         <Background></Background>
         <Foreground></Foreground>
       </div>
-      <button
-        onClick={() => darkModeHandler()}
-        className="absolute top-5 right-0 z-10 bg-slate-200 p-3 rounded-l-full cursor-pointer dark:bg-black outline-none"
-      >
-        {
-          dark && <BsFillSunFill className="dark:text-gray-300" /> // render sunny when dark is true
-        }
-        {
-          !dark && <IoMoon /> // render moon when dark is false
-        }
-      </button>
     </>
   );
 }
